@@ -3,7 +3,7 @@ import userService from "../services/user.service.js";
 class UserControllers{
     registerUser = async (req, res)=>{
         try{
-            const result = await userService.register(req.body)
+            const result = await userService.register(req.body, req.file.path)
             if(result){
                 res.status(200).json({message: 'Регистрация прошла успешно'})
             }
@@ -37,7 +37,7 @@ class UserControllers{
     }
     delete = async (req, res) =>{
         try{
-            const result = await userService.put(req.body) 
+            const result = await userService.delete(req.body) 
             if(result == 1){
                 res.status(200).json({message: 'Удаление прошло успешно'})
             }else{

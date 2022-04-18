@@ -22,6 +22,10 @@ const User = sequelize.define("user", {
         type: Sequelize.STRING,
         allowNull: false,
     },
+    photo:{
+        type: Sequelize.STRING,
+        allowNull: false,
+    },
     createdAt: {
         allowNull: true,
         type: Sequelize.DATE,
@@ -30,7 +34,6 @@ const User = sequelize.define("user", {
         allowNull: true,
         type: Sequelize.DATE,
     },
-    
 });
 
 export default User

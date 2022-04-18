@@ -13,7 +13,7 @@ const generateAccessToken = (id, login) => {
 }
 
 class UserService {
-register = (body) =>{
+register = (body, file) =>{
     let salt = bcrypt.genSaltSync();
     body.password = bcrypt.hashSync(body.password, salt);
     return User.create({
@@ -21,6 +21,7 @@ register = (body) =>{
         login: body.login,
         email: body.email,
         password: body.password,
+        photo: file
     })
 }
 login = async (body) =>{
