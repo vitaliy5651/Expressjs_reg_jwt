@@ -11,15 +11,9 @@ class UserControllers{
     }
     registerUser = async (req, res)=>{
         try{
-<<<<<<< HEAD
-            const result = await userService.register(req.body)
-            if(result){
-                res.status(200).json(result)
-=======
             const result = await userService.register(req.body, req.file.path)
             if(result){
                 res.status(200).json({message: 'Регистрация прошла успешно'})
->>>>>>> 8f73bb5ff5b460b4937bc5220dc30b06170b36c5
             }
         }catch(e){
             console.log(e)
