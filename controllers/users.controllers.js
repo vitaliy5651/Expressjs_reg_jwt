@@ -39,11 +39,7 @@ class UserControllers{
     put = async (req, res) =>{
         try{
             const result = await userService.put(req.body) 
-<<<<<<< HEAD
-            if(result.modifiedCount == 1){
-=======
             if(result == 1){
->>>>>>> 8f73bb5ff5b460b4937bc5220dc30b06170b36c5
                 res.status(200).json({message: 'Обновление прошло успешно'})
             }else{
                 res.status(400).json({message: 'Ошибка обновления'})
@@ -56,11 +52,7 @@ class UserControllers{
     delete = async (req, res) =>{
         try{
             const result = await userService.delete(req.body) 
-<<<<<<< HEAD
-            if(result.deletedCount == 1){
-=======
             if(result == 1){
->>>>>>> 8f73bb5ff5b460b4937bc5220dc30b06170b36c5
                 res.status(200).json({message: 'Удаление прошло успешно'})
             }else{
                 res.status(400).json({message: 'Ошибка удаления'})
