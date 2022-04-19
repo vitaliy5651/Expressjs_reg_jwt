@@ -6,6 +6,8 @@ const sequelize = new Sequelize("users", "root", "Vitosbarbos619", {
     define:{
         timestamps: false
     }
+
+    
 });
 
 export default sequelize
