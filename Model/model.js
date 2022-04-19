@@ -1,3 +1,26 @@
+<<<<<<< HEAD
+import mongoose from "mongoose";
+import bcrypt from "bcrypt";
+
+const userShema = new mongoose.Schema({
+    login: {
+        type: String,
+        unique: true,
+        
+    },
+    email: String,
+    password: {
+        type: String,
+        set: value => bcrypt.hashSync(value, bcrypt.genSaltSync())
+    },
+    // img:{
+    //     fieldName: String,
+    //     originalName: String,
+    // }
+},{versionKey: false})
+
+export default mongoose.model('User', userShema)
+=======
 import sequelize from "../Connect/connect.js";
 import { Sequelize } from "sequelize";
 
@@ -37,4 +60,5 @@ const User = sequelize.define("user", {
 });
 
 export default User
+>>>>>>> 8f73bb5ff5b460b4937bc5220dc30b06170b36c5
 
