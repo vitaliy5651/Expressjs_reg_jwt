@@ -6,6 +6,8 @@ import multer from '../middlewares/upload.js'
 
 const router =  Router()
 
+router.get('/', userControllers.get)
+router.get('/:id', userControllers.getOne)
 router.post('/reg',multer,validate(), userControllers.registerUser)
 router.post('/login',validate(), userControllers.login)
 router.put('/update',multer,auth, userControllers.put)

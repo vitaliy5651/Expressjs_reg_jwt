@@ -13,6 +13,12 @@ const generateAccessToken = (id, login) => {
 }
 
 class UserService {
+getAll = () => {
+    return User.findAll({attributes: ['id', 'login', 'email','photo']})
+}
+getOne = (key) =>{
+    return User.findOne({attributes:{exclude:['password', 'createdAt', 'updatedAt']},where:{id: key}}) 
+}
 register = (body, file) =>{
     let salt = bcrypt.genSaltSync();
     body.password = bcrypt.hashSync(body.password, salt);
