@@ -11,4 +11,4 @@ const storageConfig = multer.diskStorage({
     }
 });
 
-export default multer({storage: storageConfig}).single('photo')
+export default multer({storage: storageConfig}).single('img')

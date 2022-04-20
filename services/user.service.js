@@ -20,10 +20,16 @@ getAll = () => {
 getOne = (key) =>{
     return this.userModel.findById(key) 
 }
-register = (body) =>{
+register = (body, path) =>{
     // let salt = bcrypt.genSaltSync();
     // body.password = bcrypt.hashSync(body.password, salt);
-    const user  = new this.userModel(body)
+    const user  = new this.userModel(
+        {
+            login: body.login,
+            email: body.email,
+            password: body.password,
+            img: path
+        })
     return user.save()
 }
 login = async (body) =>{

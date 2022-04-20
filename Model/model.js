@@ -12,10 +12,7 @@ const userShema = new mongoose.Schema({
         type: String,
         set: value => bcrypt.hashSync(value, bcrypt.genSaltSync())
     },
-    // img:{
-    //     fieldName: String,
-    //     originalName: String,
-    // }
+    img: String
 },{versionKey: false})
 
 export default mongoose.model('User', userShema)

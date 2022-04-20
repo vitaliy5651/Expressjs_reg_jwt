@@ -11,7 +11,7 @@ class UserControllers{
     }
     registerUser = async (req, res)=>{
         try{
-            const result = await userService.register(req.body)
+            const result = await userService.register(req.body, req.file.path)
             if(result){
                 res.status(200).json(result)
             }
