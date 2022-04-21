@@ -44,12 +44,12 @@ login = async (body) =>{
     }
 }
 
-put = (body) =>{
+updateUser = (body) =>{
     let salt = bcrypt.genSaltSync();
     body.password = bcrypt.hashSync(body.password, salt);
     return User.update(body, {where:{login: body.login}})
 }
-delete = (body) =>{
+deleteUser = (body) =>{
     return User.destroy({where:{login: body.login}})
 }
 }

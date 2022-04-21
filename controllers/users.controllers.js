@@ -32,7 +32,7 @@ class UserControllers{
     }
     put = async (req, res) =>{
         try{
-            const result = await userService.put(req.body) 
+            const result = await userService.updateUser(req.body) 
             if(result == 1){
                 res.status(200).json({message: 'Обновление прошло успешно'})
             }else{
@@ -45,7 +45,7 @@ class UserControllers{
     }
     delete = async (req, res) =>{
         try{
-            const result = await userService.delete(req.body) 
+            const result = await userService.deleteUser(req.body) 
             if(result == 1){
                 res.status(200).json({message: 'Удаление прошло успешно'})
             }else{
