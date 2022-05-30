@@ -11,7 +11,7 @@ class UserControllers{
     }
     registerUser = async (req, res)=>{
         try{
-            const result = await userService.register(req.body, req.file.path)
+            const result = await userService.register(req.body)
             if(result){
                 res.status(200).json(result)
             }
@@ -61,7 +61,5 @@ class UserControllers{
 
 
 let userControllers = new UserControllers()
-
-//userControllers.post()
 
 export default userControllers
