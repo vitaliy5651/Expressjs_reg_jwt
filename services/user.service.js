@@ -21,10 +21,10 @@ getOne = (key) =>{
     return this.userModel.findById(key) 
 }
 register = (body) =>{
-    // let salt = bcrypt.genSaltSync();
-    // body.password = bcrypt.hashSync(body.password, salt);
     const user = new this.userModel(
         {
+            FirstName: body.FirstName,
+            LastName: body.LastName,
             login: body.login,
             email: body.email,
             password: body.password,
@@ -32,7 +32,7 @@ register = (body) =>{
     return user.save()
 }
 login = async (body) =>{
-    const user = await this.userModel.find({login: body.login})
+    const user = await this.userModel.find({id: body.id})
     if(!user){
         return 'Такого пользователя не существует!'
     }
@@ -48,7 +48,7 @@ login = async (body) =>{
 put = (body) =>{
     let salt = bcrypt.genSaltSync();
     body.password = bcrypt.hashSync(body.password, salt);
-    return this.userModel.updateOne({login: body.login}, {$set: body})
+    return this.userModel.updateOne({id: body.id}, {$set: body})
 }
 delete = (body) =>{
     return this.userModel.deleteOne({login: body.login})

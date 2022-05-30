@@ -1,11 +1,16 @@
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
+import { string } from "joi";
 
 const userShema = new mongoose.Schema({
+    FirstName: {
+        type: String,
+    },
+    LastName: {
+        type: String,
+    },
     login: {
         type: String,
-        unique: true,
-        
     },
     email: String,
     password: {
