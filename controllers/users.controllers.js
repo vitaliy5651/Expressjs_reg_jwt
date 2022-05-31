@@ -6,7 +6,7 @@ class UserControllers{
         res.status(200).json(result)
     }
     getOne = async (req,res) =>{
-        const result =await userService.getOne(req.params.id)
+        const result = await userService.getOne(req.params.id)
         res.status(200).json(result)
     }
     registerUser = async (req, res)=>{
