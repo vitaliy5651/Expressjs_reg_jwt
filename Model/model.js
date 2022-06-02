@@ -5,7 +5,10 @@ const userShema = new mongoose.Schema({
     FirstName: String,
     LastName: String,
     login: String,
-    email: String,
+    email: {
+        type: String,
+        unique: true,
+    },
     password: {
         type: String,
         set: value => bcrypt.hashSync(value, bcrypt.genSaltSync())

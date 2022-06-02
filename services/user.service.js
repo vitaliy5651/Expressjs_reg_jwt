@@ -43,6 +43,7 @@ login = async (body) =>{
         const token = generateAccessToken(user.id, user.login)
         return token
     }
+
 }
 
 put = (body) =>{
