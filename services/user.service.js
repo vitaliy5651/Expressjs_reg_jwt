@@ -32,12 +32,11 @@ register = (body) =>{
     return user.save()
 }
 login = async (body) =>{
-    const user = await this.userModel.find({id: body.id})
+    const user = await this.userModel.find({email: body.email})
     if(!user){
         return 'Такого пользователя не существует!'
     }
-    const validPassword = await bcrypt.compare(body.password, user[0].password)
-    if(!validPassword){
+    if(body.password !== user[0].password){
         return 'Invalid password'
     }else{
         const token = generateAccessToken(user.id, user.login)
