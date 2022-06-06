@@ -1,27 +1,22 @@
-import "../Model/model.js"
+import "../Model/Usermodel.js"
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
 import jsonwebtoken from "jsonwebtoken"
+import tokensService from "./tokens.service.js";
+import { UserDtos } from "../dtos/users.dtos.js";
 
 
 
-const generateAccessToken = (id, login) => {
-    const payload ={
-        id, login
-    }
-    return jsonwebtoken.sign(payload, 'secret', {expiresIn: '24h'})
-}
+
 
 class UserService {
     userModel = mongoose.model('User')
+    tokenModel = mongoose.model('Token')
 getAll = () => {
     return this.userModel.find()
 }
-getOne = (key) =>{
-    return this.userModel.findById(key) 
-}
-register = (body) =>{
-    const user = new this.userModel(
+register = async (body) =>{
+    const user = await this.userModel.create(
         {
             FirstName: body.FirstName,
             LastName: body.LastName,
@@ -29,7 +24,11 @@ register = (body) =>{
             email: body.email,
             password: body.password,
         })
-    return user.save()
+        user.save()
+        const userDtos = new UserDtos(user)
+    const tokens = tokensService.generateTokens({...userDtos})
+    await tokensService.saveToken(userDtos.id, tokens.refreshToken)
+    return {...tokens, user}
 }
 login = async (body) =>{
     const user = await this.userModel.find({email: body.email})
