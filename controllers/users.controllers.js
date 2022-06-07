@@ -8,9 +8,8 @@ class UserControllers{
     registrationUser = async (req, res)=>{
         try{
             const result = await userService.register(req.body)
-            if(result){
-                res.status(200).json(result)
-            }
+            res.cookie('refreshToken', result.refreshToken, {maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true})
+            return res.status(200).json(result)
         }catch(e){
             console.log(e)
             res.status(400).json({message: 'Ошибка регистрации'})
@@ -19,7 +18,8 @@ class UserControllers{
     login = async(req, res) =>{
         try{
         const result = await userService.login(req.body)
-        res.status(200).json(result)
+        res.cookie('refreshToken', result.refreshToken, {maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true})
+        return res.status(200).json(result)
         }
         catch(e){
             console.log(e)
