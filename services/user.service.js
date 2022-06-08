@@ -25,19 +25,19 @@ register = async (body) =>{
         const userDtos = new UserDtos(user)
     const tokens = tokensService.generateTokens({...userDtos})
     await tokensService.saveToken(userDtos.id, tokens.refreshToken)
-    return {...tokens, user}
+    return {...tokens,user}
 }
 login = async (body) =>{
     const user = await this.userModel.find({email: body.email})
-    if(!user){
+    if (!user){
         return 'Такого пользователя не существует!'
-    }else if(body.password !== user[0].password){
+    } else if(body.password !== user[0].password){
         return 'Invalid password'
-    }else{
+    } else {
         const userDtos = new UserDtos(user)
         const tokens = tokensService.generateTokens({...userDtos})
         await tokensService.saveToken(userDtos.id, tokens.refreshToken)
-        return {...tokens, user}
+        return {...tokens,user}
     }
 }
 
