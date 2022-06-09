@@ -1,9 +1,9 @@
 import "../Model/Usermodel.js"
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
-import jsonwebtoken from "jsonwebtoken"
 import tokensService from "./tokens.service.js";
 import { UserDtos } from "../dtos/users.dtos.js";
+import { MongoAPIError } from "mongodb";
 
 
 class UserService {
@@ -11,6 +11,21 @@ class UserService {
     tokenModel = mongoose.model('Token')
 getAll = () => {
     return this.userModel.find()
+}
+getNewToken = async (refreshToken) => {
+    if(!refreshToken){
+        return 'Пользователь не авторизован'
+    }
+    const result = tokensService.validateRefreshToken(refreshToken)
+    const tokenFromDB = await tokensService.findToken(refreshToken)
+    if(!userData || !tokenFromDB){
+        throw ApiError.UnauthorizedError()
+    }
+    const user = await this.userModel.findById(result.id)
+    const userDtos = new UserDtos(user)
+    const tokens = tokensService.generateTokens({...userDtos})
+    await tokensService.saveToken(userDtos.id, tokens.refreshToken)
+    return {...tokens,user}
 }
 register = async (body) =>{
     const user = await this.userModel.create(

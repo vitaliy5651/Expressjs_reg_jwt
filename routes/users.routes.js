@@ -7,6 +7,7 @@ const router =  Router()
 
 
 router.get('/', userControllers.get)
+router.get('/refresh', userControllers.refreshToken)
 router.post('/reg', validate(), userControllers.registrationUser)
 router.post('/login', userControllers.login)
 router.put('/update', validate(), auth, userControllers.put)

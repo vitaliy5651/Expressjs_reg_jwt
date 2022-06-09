@@ -5,6 +5,16 @@ class UserControllers{
         const result = await userService.getAll()
         res.status(200).json(result)
     }
+    refreshToken = async (req, res, next) => {
+        try{
+            const {refreshToken} = req.cookies;
+            const result = await userService.getNewToken(refreshToken)
+            res.cookie('refreshToken', result.refreshToken, {maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true})
+            return res.json(result)
+        } catch (e){
+            next(e)
+        }
+    }
     registrationUser = async (req, res)=>{
         try{
             const result = await userService.register(req.body)
