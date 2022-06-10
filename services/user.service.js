@@ -3,7 +3,6 @@ import mongoose from "mongoose";
 import bcrypt from "bcrypt";
 import tokensService from "./tokens.service.js";
 import { UserDtos } from "../dtos/users.dtos.js";
-import { MongoAPIError } from "mongodb";
 
 
 class UserService {
