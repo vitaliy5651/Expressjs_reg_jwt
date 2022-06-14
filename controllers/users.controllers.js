@@ -5,6 +5,14 @@ class UserControllers{
         const result = await userService.getAll()
         res.status(200).json(result)
     }
+    getLoginUser = async (req, res) => {
+        try{
+        const result = await userService.getOne(req.params.email)
+        res.status(200).json(result)
+        }catch (e){
+            res.status(400).json({message: 'Пользователь не найден'})
+        }
+    }
     refreshToken = async (req, res, next) => {
         try{
             const {refreshToken} = req.cookies;

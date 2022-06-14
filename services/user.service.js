@@ -11,6 +11,10 @@ class UserService {
 getAll = () => {
     return this.userModel.find()
 }
+getOne = async (Useremail) => {
+const user = this.userModel.findOne({email: Useremail})
+return user
+}
 getNewToken = async (refreshToken) => {
     if(!refreshToken){
         return 'Пользователь не авторизован'
