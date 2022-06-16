@@ -21,8 +21,8 @@ getNewToken = async (refreshToken) => {
     }
     const result = tokensService.validateRefreshToken(refreshToken)
     const tokenFromDB = await tokensService.findToken(refreshToken)
-    if(!userData || !tokenFromDB){
-        throw ApiError.UnauthorizedError()
+    if(!result || !tokenFromDB){
+        return 'Произошла ошибка при авторизации'
     }
     const user = await this.userModel.findById(result.id)
     const userDtos = new UserDtos(user)

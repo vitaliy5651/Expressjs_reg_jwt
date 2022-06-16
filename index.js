@@ -1,11 +1,18 @@
 import express from 'express';
 import serverRoutes from './routes/users.routes.js'
-import connect from './Connect/connect.js';
+import connect from './Connect/connect.js'
+import path from 'path'
 import cors from 'cors'
-import cookieParser from 'cookie-parser';
+import cookieParser from 'cookie-parser'
+import { fileURLToPath } from 'url';
 
 const app = express()
 const PORT = process.env.PORT ?? 5000;
+const __filename = fileURLToPath(import.meta.url);
+
+const __dirname = path.dirname(__filename);
+
+app.use('/assets/images', express.static(path.join(__dirname, 'images')))
 app.use(cookieParser())
 app.use(cors())
 app.use(function(req, res, next) {
