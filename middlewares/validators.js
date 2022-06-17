@@ -1,21 +1,21 @@
-import Joi from "joi"
+import Joi from 'joi'
 
 const userShema = Joi.object({
-    FirstName: Joi.string().min(5).required(),
-    LastName: Joi.string().min(6).required(),
-    login: Joi.string().min(3).required().alphanum(),
-    email: Joi.string().min(4).required().email(),
-    password: Joi.string().min(6).required()
+  FirstName: Joi.string().min(5).required(),
+  LastName: Joi.string().min(6).required(),
+  login: Joi.string().min(3).required().alphanum(),
+  email: Joi.string().min(4).required().email(),
+  password: Joi.string().min(6).required()
 })
 
 const validate = (shema) => async (req, res, next) => {
-    shema = userShema
-    try {
-        await shema.validateAsync(req.body)
-        next()
-    } catch (e) {
-        res.status(400).send(e.details)
-    }
+  shema = userShema
+  try {
+    await shema.validateAsync(req.body)
+    next()
+  } catch (e) {
+    res.status(400).send(e.details)
+  }
 }
 
 export default validate
