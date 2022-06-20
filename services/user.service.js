@@ -72,8 +72,6 @@ class UserService {
   }
 
   put = async (body, file) => {
-    const salt = bcrypt.genSaltSync()
-    body.password = bcrypt.hashSync(body.password, salt)
     const user = await this.userModel.updateOne({ email: body.email }, { $set: body, avatar: file })
     return user
   }

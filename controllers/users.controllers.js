@@ -53,12 +53,11 @@ class UserControllers {
     try {
       const result = await userService.put(req.body, req.file.path)
       if (result.modifiedCount === 1) {
-        res.status(200).json({ message: 'Обновление прошло успешно' })
+        res.status(200).json(result)
       } else {
         res.status(400).json({ message: 'Ошибка обновления' })
       }
     } catch (e) {
-      console.log(e)
       res.status(400).json({ message: 'Error' })
     }
   }
