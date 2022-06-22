@@ -12,11 +12,11 @@ const __filename = fileURLToPath(import.meta.url)
 
 const __dirname = path.dirname(__filename)
 
-app.use('/assets/images', express.static(path.join(__dirname, 'images')))
+app.use('/assets/images', express.static(path.join(__dirname, '/assets/images')))
 app.use(cookieParser())
-app.use(cors())
+app.use(cors({ credentials: true, origin: 'http://localhost:3000' }))
 app.use(function (req, res, next) {
-  res.header('Access-Control-Allow-Origin', '*')
+  res.header('Access-Control-Allow-Origin', 'http://localhost:3000')
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
   next()
 })

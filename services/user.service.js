@@ -12,8 +12,9 @@ class UserService {
   }
 
   getOne = async (Useremail) => {
-    const user = this.userModel.findOne({ email: Useremail })
-    return user
+    const user = await this.userModel.findOne({ email: Useremail })
+    const refreshToken = await tokensService.findTokenbyid(user.id)
+    return { refreshToken, user }
   }
 
   getNewToken = async (refreshToken) => {
@@ -22,7 +23,6 @@ class UserService {
     }
     const result = tokensService.validateRefreshToken(refreshToken)
     const tokenFromDB = await tokensService.findToken(refreshToken)
-    console.log(tokenFromDB)
     if (!result || !tokenFromDB) {
       return 'Произошла ошибка при авторизации'
     }
@@ -72,6 +72,11 @@ class UserService {
   }
 
   put = async (body, file) => {
+    console.log(body.password)
+    if (body.password !== '') {
+      const salt = bcrypt.genSaltSync()
+      body.password = bcrypt.hashSync(body.password, salt)
+    }
     const user = await this.userModel.updateOne({ email: body.email }, { $set: body, avatar: file })
     return user
   }

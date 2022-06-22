@@ -37,6 +37,11 @@ class TokenService {
     return token
   }
 
+  findTokenbyid = async (UserId) => {
+    const token = await TokenModel.findOne({ user: UserId })
+    return token.refreshToken
+  }
+
   findToken = async (refreshToken) => {
     const token = await TokenModel.findOne({ refreshToken })
     return token

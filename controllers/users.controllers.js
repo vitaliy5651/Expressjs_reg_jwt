@@ -9,6 +9,7 @@ class UserControllers {
   getLoginUser = async (req, res) => {
     try {
       const result = await userService.getOne(req.params.email)
+      res.cookie('refreshToken', result.refreshToken, { maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true })
       res.status(200).json(result)
     } catch (e) {
       res.status(400).json({ message: 'Пользователь не найден' })
@@ -17,6 +18,7 @@ class UserControllers {
 
   refreshToken = async (req, res, next) => {
     try {
+      console.log(req.cookies)
       const { refreshToken } = req.cookies
       const result = await userService.getNewToken(refreshToken)
       res.cookie('refreshToken', result.refreshToken, { maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true })
@@ -58,7 +60,7 @@ class UserControllers {
         res.status(400).json({ message: 'Ошибка обновления' })
       }
     } catch (e) {
-      res.status(400).json({ message: 'Error' })
+      res.status(500).json({ message: 'Error' })
     }
   }
 

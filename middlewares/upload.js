@@ -11,4 +11,6 @@ const storageConfig = multer.diskStorage({
   }
 })
 
-export default multer({ storage: storageConfig }).single('img')
+// const types = ['image/png', 'image/jpeg', 'image/jpg']
+
+export default multer({ storage: storageConfig }).single('avatar')

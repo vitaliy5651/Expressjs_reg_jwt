@@ -11,7 +11,8 @@ const userShema = new mongoose.Schema({
   },
   password: {
     type: String,
-    set: value => bcrypt.hashSync(value, bcrypt.genSaltSync())
+    required: true,
+    set: value => bcrypt.hashSync(value, 10, bcrypt.genSaltSync())
   },
   avatar: { type: String }
 }, { versionKey: false })
