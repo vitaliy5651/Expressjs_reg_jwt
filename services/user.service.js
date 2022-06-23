@@ -55,10 +55,7 @@ class UserService {
 
   login = async (body) => {
     const user = await this.userModel.find({ email: body.email })
-    console.log(user[0].password)
-    console.log(body.password)
     const validPassword = await bcrypt.compare(body.password, user[0].password)
-    console.log(validPassword)
     if (!user) {
       return 'Такого пользователя не существует!'
     } else if (!validPassword) {
@@ -77,7 +74,7 @@ class UserService {
       const salt = bcrypt.genSaltSync()
       body.password = bcrypt.hashSync(body.password, salt)
     }
-    const user = await this.userModel.updateOne({ email: body.email }, { $set: body, avatar: file })
+    const user = await this.userModel.updateOne({ id: body.id }, { $set: body, avatar: file })
     return user
   }
 

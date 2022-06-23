@@ -13,6 +13,7 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
 app.use('/assets/images', express.static(path.join(__dirname, '/assets/images')))
+app.use('/assets/images', express.static(path.join(__dirname, '/assets/images/ImageOfPosts')))
 app.use(cookieParser())
 app.use(cors({ credentials: true, origin: 'http://localhost:3000' }))
 app.use(function (req, res, next) {

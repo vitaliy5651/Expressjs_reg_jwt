@@ -1,7 +1,7 @@
 import mongoose from 'mongoose'
 import bcrypt from 'bcrypt'
 
-const userShema = new mongoose.Schema({
+const userSchema = new mongoose.Schema({
   FirstName: String,
   LastName: String,
   login: String,
@@ -11,10 +11,31 @@ const userShema = new mongoose.Schema({
   },
   password: {
     type: String,
-    required: true,
-    set: value => bcrypt.hashSync(value, 10, bcrypt.genSaltSync())
+    required: true
   },
   avatar: { type: String }
 }, { versionKey: false })
 
-export default mongoose.model('User', userShema)
+userSchema.pre('save', function (next) {
+  const user = this
+  if (user.isModified('password') || this.isNew) {
+    bcrypt.genSalt(10, function (saltError, salt) {
+      if (saltError) {
+        return next(saltError)
+      } else {
+        bcrypt.hash(user.password, salt, function (hashError, hash) {
+          if (hashError) {
+            return next(hashError)
+          }
+
+          user.password = hash
+          next()
+        })
+      }
+    })
+  } else {
+    return next()
+  }
+})
+
+export default mongoose.model('User', userSchema)
