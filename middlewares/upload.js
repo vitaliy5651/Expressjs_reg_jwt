@@ -18,13 +18,4 @@ const storageConfig = multer.diskStorage({
 
 // const types = ['image/png', 'image/jpeg', 'image/jpg']
 
-export default multer({ storage: storageConfig }).fields(
-  [
-    {
-      name: 'imageOfPost'
-    },
-    {
-      name: 'avatar'
-    }
-  ]
-)
+export default multer({ storage: storageConfig }).single('avatar')

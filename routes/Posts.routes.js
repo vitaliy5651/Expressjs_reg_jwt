@@ -17,7 +17,7 @@ const __dirname = path.dirname(__filename)
 app.use('/assets/images', express.static(path.join(__dirname, '/assets/images/ImageOfPosts')))
 
 routerOfPosts.get('/getAllPosts', auth, PostsControllers.getAll)
-routerOfPosts.post('/createPost', multer().fields([{ name: '' }]), PostsControllers.createPost)
+routerOfPosts.post('/createPost', multer, PostsControllers.createPost)
 routerOfPosts.put('/updatePost')
 
 export default routerOfPosts
