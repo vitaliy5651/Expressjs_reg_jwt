@@ -7,11 +7,11 @@ const PostsSchema = new mongoose.Schema({
   likes: { type: Number },
   dateOfCreatePosts: { type: Date },
   comments: [{
-    userComment: {
+    authorId: {
       type: Schema.Types.ObjectId,
       ref: 'User'
     },
-    type: String
+    content: { type: String }
   }],
   imageOfPost: { type: String }
 })

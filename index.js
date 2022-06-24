@@ -1,5 +1,6 @@
 import express from 'express'
 import serverRoutes from './routes/users.routes.js'
+import routerOfPosts from './routes/Posts.routes.js'
 import connect from './Connect/connect.js'
 import path from 'path'
 import cors from 'cors'
@@ -13,7 +14,7 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
 app.use('/assets/images', express.static(path.join(__dirname, '/assets/images')))
-app.use('/assets/images', express.static(path.join(__dirname, '/assets/images/ImageOfPosts')))
+
 app.use(cookieParser())
 app.use(cors({ credentials: true, origin: 'http://localhost:3000' }))
 app.use(function (req, res, next) {
@@ -23,6 +24,7 @@ app.use(function (req, res, next) {
 })
 app.use(express.json())
 app.use('/', serverRoutes)
+app.use('/Posts', routerOfPosts)
 
 connect.then(() => {
   app.listen(PORT, () => {

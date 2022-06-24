@@ -1,4 +1,4 @@
-import PostsService from '../services/Posts.service'
+import PostsService from '../services/Posts.service.js'
 
 class PostsControllers {
   getAll = async (req, res) => {
@@ -11,7 +11,7 @@ class PostsControllers {
   }
 
   createPost = async (req, res) => {
-    const Userpost = await PostsService.CreatePostUser(req.body)
+    const Userpost = await PostsService.CreatePostUser(req.body, req.file.path)
     try {
       res.status(200).json(Userpost)
     } catch (error) {
