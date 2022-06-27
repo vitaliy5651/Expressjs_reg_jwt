@@ -13,6 +13,7 @@ class PostsControllers {
   createPost = async (req, res) => {
     const Userpost = await PostsService.CreatePostUser(req.body, req.file.path)
     try {
+      console.log('enter')
       res.status(200).json(Userpost)
     } catch (error) {
       res.status(400).json(error)
