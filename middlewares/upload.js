@@ -3,11 +3,12 @@ import { v4 as uuidv4 } from 'uuid'
 
 const storageConfig = multer.diskStorage({
   destination: (req, file, cb) => {
-    console.log(file)
     if (file.fieldname === 'postsImages') {
       cb(null, 'assets/images/ImageOfPosts')
     } else if (file.fieldname === 'avatar') {
       cb(null, 'assets/images/avatars')
+    } else if (file.fieldname === 'videoOfPosts') {
+      cb(null, 'assets/images/videoOfPosts')
     }
   },
   filename: (req, file, cb) => {

@@ -7,8 +7,13 @@ class PostsService {
     return posts
   }
 
-  CreatePostUser = async (body, image) => {
-    const user = await UserModel.findById(body.userId)
+  getTimeLinePost = async (userId) => {
+    const posts = await PostModel.find({ user: userId })
+    return posts
+  }
+
+  CreatePostUser = async (body, files) => {
+    const user = await UserModel.findById(body.user)
     // const author = await UserModel.findById(body.comments.authorId)
     if (!user) {
       return 'Пользователь не найден'
@@ -17,9 +22,10 @@ class PostsService {
       user: user.id,
       likes: body.likes,
       description: body.description,
-      imageOfPost: image
+      imageOfPost: files.image,
+      videoOfPost: files.video
     })
-    return post
+    return { post }
   }
 }
 

@@ -17,7 +17,8 @@ const __dirname = path.dirname(__filename)
 app.use('/assets/images', express.static(path.join(__dirname, '/assets/images/ImageOfPosts')))
 
 routerOfPosts.get('/getAllPosts', auth, PostsControllers.getAll)
-routerOfPosts.post('/createPost', multer.single('postsImages'), PostsControllers.createPost)
+routerOfPosts.get('/getTimeLinePost/:id', auth, PostsControllers.TimeLinePosts)
+routerOfPosts.post('/createPost', auth, multer.fields([{ name: 'videoOfPosts', maxCount: 1 }, { name: 'postsImages', maxCount: 1 }]), PostsControllers.createPost)
 routerOfPosts.put('/updatePost')
 
 export default routerOfPosts
