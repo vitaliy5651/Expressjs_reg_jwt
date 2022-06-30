@@ -1,6 +1,7 @@
 import express from 'express'
 import serverRoutes from './routes/users.routes.js'
 import routerOfPosts from './routes/Posts.routes.js'
+import routerOfComments from './routes/Comments.routes.js'
 import connect from './Connect/connect.js'
 import path from 'path'
 import cors from 'cors'
@@ -25,6 +26,7 @@ app.use(function (req, res, next) {
 app.use(express.json())
 app.use('/', serverRoutes)
 app.use('/Posts', routerOfPosts)
+app.use('/Comments', routerOfComments)
 
 connect.then(() => {
   app.listen(PORT, () => {

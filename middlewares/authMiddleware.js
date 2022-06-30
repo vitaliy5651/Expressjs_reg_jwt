@@ -6,7 +6,6 @@ const auth = async (req, res, next) => {
     if (!authorizationHeader) {
       return next(res.status(401).json({ message: 'Вы не вошли в систему' }))
     }
-
     const accessToken = authorizationHeader.split(' ')[1]
     if (!accessToken) {
       return next(res.status(401).json({ message: 'Пользователь не авторизован' }))
@@ -15,7 +14,6 @@ const auth = async (req, res, next) => {
     if (!userData) {
       return next(res.status(401).json({ message: 'Ошибка при валидации токена' }))
     }
-
     req.user = userData
     next()
   } catch {

@@ -1,7 +1,7 @@
 import userService from '../services/user.service.js'
 
 class UserControllers {
-  get = async (req, res) => {
+  getAllUsers = async (req, res) => {
     const result = await userService.getAll()
     res.status(200).json(result)
   }
@@ -52,14 +52,14 @@ class UserControllers {
 
   put = async (req, res) => {
     try {
-      const result = await userService.put(req.body, req.file.path)
+      const result = await userService.updateUser(req.body, req.file.path)
       if (result.modifiedCount === 1) {
         res.status(200).json(result)
       } else {
         res.status(400).json({ message: 'Ошибка обновления' })
       }
     } catch (e) {
-      res.status(500).json({ message: 'Error' })
+      res.status(500).json({ message: e })
     }
   }
 

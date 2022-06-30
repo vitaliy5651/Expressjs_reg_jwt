@@ -68,7 +68,7 @@ class UserService {
     }
   }
 
-  put = async (body, file) => {
+  updateUser = async (body, file) => {
     if (body.password !== '') {
       const salt = bcrypt.genSaltSync()
       body.password = bcrypt.hashSync(body.password, salt)

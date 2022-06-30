@@ -8,7 +8,7 @@ const PostsSchema = new mongoose.Schema({
   Created: { type: Date, default: Date.now },
   comments: [{
     authorId: {
-      type: Schema.Types.ObjectId,
+      type: mongoose.Schema.Types.ObjectId,
       ref: 'User'
     },
     content: { type: String }
