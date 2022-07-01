@@ -73,8 +73,13 @@ class UserService {
       const salt = bcrypt.genSaltSync()
       body.password = bcrypt.hashSync(body.password, salt)
     }
-    const user = await this.userModel.updateOne({ id: body.id }, { $set: body, avatar: file })
-    return user
+    if (file) {
+      const user = await this.userModel.updateOne({ id: body.id }, { $set: body, avatar: file })
+      return user
+    } else {
+      const user = await this.userModel.updateOne({ id: body.id }, { $set: body, avatar: null })
+      return user
+    }
   }
 
   delete = (body) => {
