@@ -33,6 +33,9 @@ class PostsControllers {
       } else if (req.files.postsImages) {
         const Userpost = await PostsService.CreatePostUser(req.body, { image: req.files.postsImages[0].path })
         res.status(200).json(Userpost)
+      } else {
+        const Userpost = await PostsService.CreatePostUser(req.body)
+        res.status(200).json(Userpost)
       }
     } catch (error) {
       res.status(400).json(error)

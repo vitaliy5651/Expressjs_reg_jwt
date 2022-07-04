@@ -17,14 +17,25 @@ class PostsService {
     if (!user) {
       return 'Пользователь не найден'
     }
-    const post = await PostModel.create({
-      user: user.id,
-      likes: body.likes,
-      description: body.description,
-      imageOfPost: files.image,
-      videoOfPost: files.video
-    })
-    return { post }
+    if (files) {
+      const post = await PostModel.create({
+        user: user.id,
+        likes: body.likes,
+        description: body.description,
+        imageOfPost: files.image,
+        videoOfPost: files.video
+      })
+      return { post }
+    } else {
+      const post = await PostModel.create({
+        user: user.id,
+        likes: body.likes,
+        description: body.description,
+        imageOfPost: null,
+        videoOfPost: null
+      })
+      return { post }
+    }
   }
 
   UpdatePostUser = async (body, files) => {
