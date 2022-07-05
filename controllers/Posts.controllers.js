@@ -65,6 +65,15 @@ class PostsControllers {
     }
   }
 
+  setLikes = async (req, res) => {
+    try {
+      const post = await PostsService.SetLikesPost(req.body)
+      res.status(200).json(post)
+    } catch (error) {
+      res.status(404).json({ message: error })
+    }
+  }
+
   deletePost = async (req, res) => {
     const Deletepost = await PostsService.DeletePostUser(req.body)
     try {

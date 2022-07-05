@@ -40,16 +40,21 @@ class PostsService {
 
   UpdatePostUser = async (body, files) => {
     if (files) {
-      const post = await PostModel.updateOne({ id: body.id }, { $set: body, imageOfPost: files.image, videoOfPost: files.video, Created: Date.now() })
+      const post = await PostModel.updateOne({ _id: body.id }, { $set: body, imageOfPost: files.image, videoOfPost: files.video, Created: Date.now() })
       return post
     } else {
-      const post = await PostModel.updateOne({ id: body.id }, { $set: body, imageOfPost: null, videoOfPost: null, Created: Date.now() })
+      const post = await PostModel.updateOne({ _id: body.id }, { $set: body, imageOfPost: null, videoOfPost: null, Created: Date.now() })
       return post
     }
   }
 
+  SetLikesPost = async (body) => {
+    const postUpdate = await PostModel.updateOne({ _id: body.id }, { $addToSet: { likes: body.likes } })
+    return postUpdate
+  }
+
   DeletePostUser = async (body) => {
-    const post = await PostModel.deleteOne({ id: body.id })
+    const post = await PostModel.findOneAndDelete({ _id: body.id })
     return post
   }
 }

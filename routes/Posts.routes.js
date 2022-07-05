@@ -27,7 +27,8 @@ routerOfPosts.put('/updatePost', multer.fields([
     name: 'postsImages',
     maxCount: 1
   }
-]), PostsControllers.updatePost)
+]), auth, PostsControllers.updatePost)
+routerOfPosts.put('/SetLikesPost', PostsControllers.setLikes)
 routerOfPosts.delete('/deletePost', auth, PostsControllers.deletePost)
 
 export default routerOfPosts

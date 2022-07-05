@@ -74,10 +74,10 @@ class UserService {
       body.password = bcrypt.hashSync(body.password, salt)
     }
     if (file) {
-      const user = await this.userModel.updateOne({ id: body.id }, { $set: body, avatar: file })
+      const user = await this.userModel.updateOne({ _id: body.id }, { $set: body, avatar: file })
       return user
     } else {
-      const user = await this.userModel.updateOne({ id: body.id }, { $set: body, avatar: null })
+      const user = await this.userModel.updateOne({ _id: body.id }, { $set: body, avatar: null })
       return user
     }
   }
