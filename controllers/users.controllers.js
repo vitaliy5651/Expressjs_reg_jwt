@@ -52,14 +52,23 @@ class UserControllers {
 
   put = async (req, res) => {
     try {
-      const result = await userService.updateUser(req.body, req.file.path)
-      if (result.modifiedCount === 1) {
-        res.status(200).json(result)
+      if (req.file) {
+        const result = await userService.updateUser(req.body, req.file.path)
+        if (result.modifiedCount === 1) {
+          res.status(200).json({ message: 'Success updated' })
+        } else {
+          res.status(400).json({ message: 'Updated failed' })
+        }
       } else {
-        res.status(400).json({ message: 'Ошибка обновления' })
+        const result = await userService.updateUser(req.body)
+        if (result.modifiedCount === 1) {
+          res.status(200).json({ message: 'Success updated' })
+        } else {
+          res.status(400).json({ message: 'Updated failed' })
+        }
       }
     } catch (e) {
-      res.status(500).json({ message: e })
+      res.status(500).json({ message: 'Error' })
     }
   }
 
@@ -73,7 +82,7 @@ class UserControllers {
       }
     } catch (e) {
       console.log(e)
-      res.status(400).json({ message: 'Error' })
+      res.status(500).json({ message: 'Error' })
     }
   }
 }

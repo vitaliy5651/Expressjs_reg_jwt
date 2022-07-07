@@ -1,5 +1,6 @@
 import PostModel from '../Model/PostsModel.js'
 import UserModel from '../Model/Usermodel.js'
+import CommentsService from './Comments.service.js'
 
 class PostsService {
   getAllPosts = async () => {
@@ -55,6 +56,12 @@ class PostsService {
 
   DeletePostUser = async (body) => {
     const post = await PostModel.findOneAndDelete({ _id: body.id })
+    return post
+  }
+
+  deleteAllPostsofUsers = async (userId) => {
+    await CommentsService.deleteAllCommentsUser(userId)
+    const post = await PostModel.deleteMany({ user: userId })
     return post
   }
 }

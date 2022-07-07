@@ -14,8 +14,7 @@ class CommentsService {
       authorId: body.userId,
       content: body.content
     })
-    const post = await PostModel.updateOne({ _id: body.postId }, { $push: { comments: comment._id } })
-    console.log(post)
+    await PostModel.updateOne({ _id: body.postId }, { $push: { comments: comment._id } })
     return comment.populate('authorId')
   }
 
@@ -27,6 +26,11 @@ class CommentsService {
   deleteComment = async (body) => {
     const comment = await CommentsModel.deleteOne({ _id: body.id })
     return comment
+  }
+
+  deleteAllCommentsUser = async (userId) => {
+    const Comments = await CommentsModel.deleteMany({ authorId: userId })
+    return Comments
   }
 }
 
