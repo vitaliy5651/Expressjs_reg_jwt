@@ -76,13 +76,15 @@ class UserService {
     } else {
       const user = await UserModel.findById({ _id: body.id })
       body.password = user.password
-      console.log(body.password)
+      if (body.avatar === 'undefined') {
+        body.avatar = user.avatar
+      }
     }
     if (file) {
       const user = await UserModel.updateOne({ _id: body.id }, { $set: body, avatar: file })
       return user
     } else {
-      const user = await UserModel.updateOne({ _id: body.id }, { $set: body, avatar: null })
+      const user = await UserModel.updateOne({ _id: body.id }, { $set: body })
       console.log(user)
       return user
     }

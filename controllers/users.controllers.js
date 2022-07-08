@@ -76,9 +76,9 @@ class UserControllers {
     try {
       const result = await userService.delete(req.body)
       if (result.deletedCount === 1) {
-        res.status(200).json({ message: 'Удаление прошло успешно' })
+        res.status(200).json({ message: 'Delete succeed' })
       } else {
-        res.status(400).json({ message: 'Ошибка удаления' })
+        res.status(400).json({ message: 'Delete failed' })
       }
     } catch (e) {
       console.log(e)

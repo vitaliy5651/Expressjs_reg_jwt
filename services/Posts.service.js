@@ -4,7 +4,7 @@ import CommentsService from './Comments.service.js'
 
 class PostsService {
   getAllPosts = async () => {
-    const posts = await PostModel.find()
+    const posts = await PostModel.find().populate('user')
     return posts
   }
 
@@ -35,7 +35,7 @@ class PostsService {
         imageOfPost: null,
         videoOfPost: null
       })
-      return { post }
+      return post
     }
   }
 
