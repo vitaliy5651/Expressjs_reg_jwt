@@ -4,9 +4,9 @@ import auth from '../middlewares/authMiddleware.js'
 
 const routerOfComments = Router()
 
-routerOfComments.get('/getComments', auth, CommentsControllers.getAllComments)
-routerOfComments.post('/CreateComment', CommentsControllers.addComment)
-routerOfComments.put('/updateComment', auth)
-routerOfComments.delete('/deleteComment', auth)
+routerOfComments.get('/get', auth, CommentsControllers.getAllComments)
+routerOfComments.post('/post', CommentsControllers.addComment)
+routerOfComments.put('/put', auth)
+routerOfComments.delete('/delete', auth)
 
 export default routerOfComments

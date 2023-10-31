@@ -1,5 +1,5 @@
 import jsonwebtoken from 'jsonwebtoken'
-import TokenModel from '../Model/TokenModel.js'
+import TokenModel from '../Model/tokenModel.js'
 
 class TokenService {
   generateTokens = (payload) => {

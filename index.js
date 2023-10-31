@@ -9,7 +9,7 @@ import cookieParser from 'cookie-parser'
 import { fileURLToPath } from 'url'
 
 const app = express()
-const PORT = process.env.PORT ?? 5000
+const PORT = process.env.PORT ?? 5002
 const __filename = fileURLToPath(import.meta.url)
 
 const __dirname = path.dirname(__filename)
@@ -25,8 +25,8 @@ app.use(function (req, res, next) {
 })
 app.use(express.json())
 app.use('/', serverRoutes)
-app.use('/Posts', routerOfPosts)
-app.use('/Comments', routerOfComments)
+app.use('/posts', routerOfPosts)
+app.use('/comments', routerOfComments)
 
 connect.then(() => {
   app.listen(PORT, () => {

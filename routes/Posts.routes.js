@@ -6,9 +6,9 @@ import multer from '../middlewares/upload.js'
 
 const routerOfPosts = Router()
 
-routerOfPosts.get('/getAllPosts', auth, PostsControllers.getAll)
-routerOfPosts.get('/getTimeLinePost/:id', auth, PostsControllers.TimeLinePosts)
-routerOfPosts.post('/createPost', auth, multer.fields([
+routerOfPosts.get('/get', auth, PostsControllers.getAll)
+routerOfPosts.get('/getOne/:id', auth, PostsControllers.TimeLinePosts)
+routerOfPosts.post('/post', auth, multer.fields([
   {
     name: 'videoOfPosts',
     maxCount: 1
@@ -18,7 +18,7 @@ routerOfPosts.post('/createPost', auth, multer.fields([
     maxCount: 1
   }
 ]), PostsControllers.createPost)
-routerOfPosts.put('/updatePost', multer.fields([
+routerOfPosts.put('/update', multer.fields([
   {
     name: 'videoOfPosts',
     maxCount: 1
@@ -28,7 +28,7 @@ routerOfPosts.put('/updatePost', multer.fields([
     maxCount: 1
   }
 ]), auth, PostsControllers.updatePost)
-routerOfPosts.put('/SetLikesPost', PostsControllers.setLikes)
-routerOfPosts.delete('/deletePost', auth, PostsControllers.deletePost)
+routerOfPosts.put('/put', PostsControllers.setLikes)
+routerOfPosts.delete('/delete', auth, PostsControllers.deletePost)
 
 export default routerOfPosts

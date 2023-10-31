@@ -1,6 +1,6 @@
-import PostModel from '../Model/PostsModel.js'
-import UserModel from '../Model/Usermodel.js'
-import CommentsService from './Comments.service.js'
+import PostModel from '../Model/postsModel.js'
+import UserModel from '../Model/usermodel.js'
+import CommentsService from './comments.service.js'
 
 class PostsService {
   getAllPosts = async () => {
@@ -41,16 +41,30 @@ class PostsService {
 
   UpdatePostUser = async (body, files) => {
     if (files) {
-      const post = await PostModel.updateOne({ _id: body.id }, { $set: body, imageOfPost: files.image, videoOfPost: files.video, Created: Date.now() })
+      const post = await PostModel.updateOne(
+        { _id: body.id },
+        {
+          $set: body,
+          imageOfPost: files.image,
+          videoOfPost: files.video,
+          Created: Date.now()
+        }
+      )
       return post
     } else {
-      const post = await PostModel.updateOne({ _id: body.id }, { $set: body, imageOfPost: null, videoOfPost: null, Created: Date.now() })
+      const post = await PostModel.updateOne(
+        { _id: body.id },
+        { $set: body, imageOfPost: null, videoOfPost: null, Created: Date.now() }
+      )
       return post
     }
   }
 
   SetLikesPost = async (body) => {
-    const postUpdate = await PostModel.updateOne({ _id: body.id }, { $addToSet: { likes: body.likes } })
+    const postUpdate = await PostModel.updateOne(
+      { _id: body.id },
+      { $addToSet: { likes: body.likes } }
+    )
     return postUpdate
   }
 

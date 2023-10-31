@@ -1,4 +1,4 @@
-import CommentsService from '../services/Comments.service.js'
+import CommentsService from '../services/comments.service.js'
 
 class CommentsControllers {
   getAllComments = async (req, res) => {
