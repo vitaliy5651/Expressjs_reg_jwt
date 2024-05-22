@@ -1,7 +1,7 @@
 /* eslint-disable import/no-duplicates */
 import { Router } from 'express'
 import auth from '../middlewares/authMiddleware.js'
-import PostsControllers from '../controllers/Posts.controllers.js'
+import PostsControllers from '../controllers/posts.controllers.js'
 import multer from '../middlewares/upload.js'
 
 const routerOfPosts = Router()

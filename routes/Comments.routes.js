@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import CommentsControllers from '../controllers/Comments.controllers.js'
+import CommentsControllers from '../controllers/comments.controllers.js'
 import auth from '../middlewares/authMiddleware.js'
 
 const routerOfComments = Router()
